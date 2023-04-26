@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react"
+import React, { FC, useEffect, useState } from "react"
 import { Chart } from "chart.js";
 import { LuzResponse } from '../interfaces/luzResponse';
 
@@ -7,14 +7,16 @@ export const LineChart = ({ data, enabled, borderColor, backgroundColor, inKilow
     const labels = Object.keys(data);
     const [chartCreated, setchartCreated] = useState(false);
     const [myChart, setMyChart] = useState({});
+    const chartRef = React.createRef();
+
     useEffect(() => {
-        var ctx = document.getElementById('myChart');
+        const myChartRef = chartRef.current.getContext('2d');
+        //if(myChartRef.canvas.$chartjs != null && !chartCreated) return;
 
         const values = Object.values(data).map(value => inKilowatts ? (value.price / 100).toFixed(2) : value.price);
-
+        
         if (chartCreated) {
             console.log("cleaning chart");
-            myChart.options.responsive = false;
             myChart.data.labels = labels;
             myChart.data.datasets = [{
                 data: values,
@@ -26,9 +28,10 @@ export const LineChart = ({ data, enabled, borderColor, backgroundColor, inKilow
             ]
             myChart.update();
         }
-        else {
+        else{
+            console.log("creating chart");
             setchartCreated(true);
-            setMyChart(new Chart(ctx.getContext('2d'), {
+            setMyChart(new Chart(myChartRef, {
                 type: 'line',
                 data: {
                     labels: labels,
@@ -46,7 +49,7 @@ export const LineChart = ({ data, enabled, borderColor, backgroundColor, inKilow
     }, [enabled, inKilowatts])
     return (
         <>
-                <canvas id="myChart"></canvas>
+            <canvas id="myChart" ref={chartRef}></canvas>
         </>
     )
 }
