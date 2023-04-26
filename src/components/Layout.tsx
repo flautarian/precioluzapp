@@ -15,22 +15,22 @@ export const Layout: FC<Props> = ({ title, children }) => {
 
 
   return (
-      <>
-        <Head>
-            <title>{ 'Precio de la luz' }</title>
-            <meta name="author" content="Facundo Giacconi" />
-            <meta name="description" content={`Información sobre el precio de la luz de hoy dia ${title}`} />
-            <meta property="og:title" content={`Información sobre el precio de la luz (€/Mwh)`} />
-        </Head>
-      
-        <Navbar />
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta name="author" content="Facundo Giacconi" />
+        <meta name="description" content={`Información sobre el precio de la luz de hoy`} />
+        <meta property="og:title" content={`Información sobre el precio de la luz (€/Mwh)`} />
+      </Head>
 
-        <main style={{
-          padding: '0px 20px'
-        }}>
-            { children }
-        </main>
-      
-      </>
+      <Navbar />
+
+      <main style={{
+        padding: '0px 20px'
+      }}>
+        {children}
+      </main>
+
+    </>
   )
 };
