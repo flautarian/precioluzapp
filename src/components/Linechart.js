@@ -58,10 +58,7 @@ export const LineChart = ({ data, enabled, borderColor, backgroundColor, inKilow
         }
     }, [enabled, inKilowatts])
 
-    useEffect(() => {
-        window.addEventListener('resize', fitToContainer);
-        return () => window.removeEventListener('resize', fitToContainer);
-      }, []);
+    
 
     return (
         <>
