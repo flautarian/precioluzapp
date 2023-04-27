@@ -1,7 +1,7 @@
 import { GetStaticProps, NextPage } from 'next';
 import { ZoneSwitch as UiSwitch } from '@/components/UiSwitch';
 import { LineChart } from '@/components/Linechart';
-import { Card, Grid } from '@nextui-org/react';
+import { Card, Grid, Row } from '@nextui-org/react';
 import { useState } from 'react';
 import { LuzResponse } from '@/interfaces/luzResponse';
 import luzApi from '@/api/luzapi';
@@ -54,14 +54,14 @@ const MainPage: NextPage<Props> = ({ title, luzPricesPcb, luzPricesCym, minorPri
 
 
   function getMinorPrice(): string {
-    if(isPeninsula)
+    if (isPeninsula)
       return (minorPricePcb.price / (inKilowatts ? 100 : 1)) + (inKilowatts ? " €/Kwh" : " €/Mwh") + " en franja " + minorPricePcb.hour + "h";
     else
       return (minorPriceCym.price / (inKilowatts ? 100 : 1)) + (inKilowatts ? " €/Kwh" : " €/Mwh") + " en franja " + minorPriceCym.hour + "h";
   }
 
   function getMajorPrice(): string {
-    if(isPeninsula)
+    if (isPeninsula)
       return (majorPricePcb.price / (inKilowatts ? 100 : 1)) + (inKilowatts ? " €/Kwh" : " €/Mwh") + " en franja " + majorPricePcb.hour + "h";
     else
       return (majorPriceCym.price / (inKilowatts ? 100 : 1)) + (inKilowatts ? " €/Kwh" : " €/Mwh") + " en franja " + majorPriceCym.hour + "h";
@@ -102,10 +102,14 @@ const MainPage: NextPage<Props> = ({ title, luzPricesPcb, luzPricesCym, minorPri
                   <Grid xs={4}>
                     <Card css={{ $$cardColor: '$colors$success' }}>
                       <Card.Header >
-                        <h3>Hora de menor consumo:</h3>
+                        <Row justify="center" align="center">
+                          <h3>Hora de menor consumo:</h3>
+                        </Row>
                       </Card.Header>
                       <Card.Body>
-                        <h4>{ getMinorPrice() }</h4>
+                        <Row justify="center" align="center">
+                          <h4>{getMinorPrice()}</h4>
+                        </Row>
                       </Card.Body>
                     </Card>
                   </Grid>
@@ -114,10 +118,14 @@ const MainPage: NextPage<Props> = ({ title, luzPricesPcb, luzPricesCym, minorPri
                   <Grid xs={4}>
                     <Card css={{ $$cardColor: '$colors$error' }}>
                       <Card.Header >
-                        <h3 style={{ alignContent: 'center' }}>Hora de mayor consumo:</h3>
+                        <Row justify="center" align="center">
+                          <h3>Hora de mayor consumo:</h3>
+                        </Row>
                       </Card.Header>
                       <Card.Body>
-                        <h4>{ getMajorPrice()}</h4>
+                        <Row justify="center" align="center">
+                          <h4>{getMajorPrice()}</h4>
+                        </Row>
                       </Card.Body>
                     </Card>
                   </Grid>

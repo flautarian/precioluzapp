@@ -21,6 +21,7 @@ export const Layout: FC<Props> = ({ title, children }) => {
         <meta name="author" content="Facundo Giacconi" />
         <meta name="description" content={`Información sobre el precio de la luz de hoy`} />
         <meta property="og:title" content={`Información sobre el precio de la luz (€/Mwh)`} />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
       </Head>
 
       <Navbar />

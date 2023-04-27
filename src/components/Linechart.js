@@ -9,12 +9,19 @@ export const LineChart = ({ data, enabled, borderColor, backgroundColor, inKilow
     const [myChart, setMyChart] = useState({});
     const chartRef = React.createRef();
 
+    function fitToContainer(){
+        var canvas = document.querySelector('canvas');
+        canvas.style.width='100%';
+        canvas.style.height='100%';
+        canvas.width  = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+      }
+
     useEffect(() => {
         const myChartRef = chartRef.current.getContext('2d');
-        //if(myChartRef.canvas.$chartjs != null && !chartCreated) return;
 
         const values = Object.values(data).map(value => inKilowatts ? (value.price / 100).toFixed(2) : value.price);
-        
+
         if (chartCreated) {
             console.log("cleaning chart");
             myChart.data.labels = labels;
@@ -28,7 +35,8 @@ export const LineChart = ({ data, enabled, borderColor, backgroundColor, inKilow
             ]
             myChart.update();
         }
-        else{
+        else {
+            fitToContainer();
             console.log("creating chart");
             setchartCreated(true);
             setMyChart(new Chart(myChartRef, {
@@ -47,9 +55,17 @@ export const LineChart = ({ data, enabled, borderColor, backgroundColor, inKilow
             }));
         }
     }, [enabled, inKilowatts])
+
+    useEffect(() => {
+        window.addEventListener('resize', fitToContainer);
+        return () => window.removeEventListener('resize', fitToContainer);
+      }, []);
+
     return (
         <>
-            <canvas id="myChart" ref={chartRef}></canvas>
+            <div class="chart-container">
+                <canvas id="myChart" ref={chartRef}></canvas>
+            </div>
         </>
     )
 }
