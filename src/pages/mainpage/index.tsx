@@ -69,7 +69,7 @@ const MainPage: NextPage<Props> = ({ title, luzPricesPcb, luzPricesCym, minorPri
 
   return (
     <Layout>
-      <Card css={{ h: "40%", w: "80%", marginLeft: "10%", $$cardColor: '$colors$gradient' }}>
+      <Card css={{ h: "40%", w: "98%", marginLeft: "1%", $$cardColor: '$colors$gradient' }}>
         <Card.Body>
           <h2 className="mx-auto mt-10 text-xl font-semibold capitalize ">{title}</h2>
           {/* Chart */}

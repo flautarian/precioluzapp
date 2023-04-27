@@ -111,18 +111,20 @@ a {
   height: 400px;
 }
 
-h3 {
-  font-size: 1.5vw !important;
-}
-
-h4 {
-  font-size: 1.25vw !important;
-}
 
 @media screen and (max-width: 768px) {
   .chart-container {
     height: 300px;
   }
+  
+  h3 {
+    font-size: 3.5vw !important;
+  }
+  
+  h4 {
+    font-size: 3vw !important;
+  }
+  
 }
 
 @media screen and (max-width: 480px) {

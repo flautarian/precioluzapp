@@ -41,6 +41,8 @@ export const LineChart = ({ data, enabled, borderColor, backgroundColor, inKilow
             setchartCreated(true);
             setMyChart(new Chart(myChartRef, {
                 type: 'line',
+                maintainAspectRatio: false, // set to false to allow adaptive resizing
+                responsive: true,
                 data: {
                     labels: labels,
                     datasets: [{
