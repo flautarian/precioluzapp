@@ -43,7 +43,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
       majorPricePcb,
       majorPriceCym
     },
-    revalidate: 86400, // each day we regenerate static props
+    revalidate: 20, // each day we regenerate static props
   }
 }
 

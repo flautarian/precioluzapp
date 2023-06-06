@@ -20,10 +20,9 @@ export const LineChart = ({ data, enabled, borderColor, backgroundColor, inKilow
     useEffect(() => {
         const myChartRef = chartRef.current.getContext('2d');
 
-        const values = Object.values(data).map(value => inKilowatts ? (value.price / 100).toFixed(2) : value.price);
+        const values = Object.values(data).map(value => (inKilowatts ? value.price / 100 : value.price).toFixed(2));
 
         if (chartCreated) {
-            console.log("cleaning chart");
             myChart.data.labels = labels;
             myChart.data.datasets = [{
                 data: values,
@@ -37,7 +36,6 @@ export const LineChart = ({ data, enabled, borderColor, backgroundColor, inKilow
         }
         else {
             fitToContainer();
-            console.log("creating chart");
             setchartCreated(true);
             setMyChart(new Chart(myChartRef, {
                 type: 'line',
@@ -58,7 +56,10 @@ export const LineChart = ({ data, enabled, borderColor, backgroundColor, inKilow
         }
     }, [enabled, inKilowatts])
 
-    
+    useEffect(() => {
+        window.addEventListener('resize', fitToContainer);
+        return () => window.removeEventListener('resize', fitToContainer);
+      }, []);
 
     return (
         <>
