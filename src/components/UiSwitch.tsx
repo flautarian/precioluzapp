@@ -14,8 +14,10 @@ export const ZoneSwitch: FC<Props> = ({ checked, setIsPeninsula, textValues }) =
 
   return (
     <>
-      <Text>{textValues[checked ? 0 : 1]}</Text>
-      <Switch checked={checked} onChange={updateCheckStatus} />
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Text>{textValues[checked ? 0 : 1]}</Text>
+        <Switch checked={checked} onChange={updateCheckStatus} />
+      </div>
     </>)
 
 };

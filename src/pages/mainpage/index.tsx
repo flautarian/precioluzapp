@@ -6,8 +6,6 @@ import { useState } from 'react';
 import { LuzResponse } from '@/interfaces/luzResponse';
 import luzApi from '@/api/luzapi';
 import { Layout } from '@/components/Layout';
-import { AxiosResponse } from 'axios';
-import styles from '@/styles/Home.module.css';
 
 interface MarkHour {
   price: number,
@@ -69,21 +67,23 @@ const MainPage: NextPage<Props> = ({ title, luzPricesPcb, luzPricesCym, minorPri
 
   return (
     <Layout>
-      <Card css={{ h: "40%", w: "98%", marginLeft: "1%", $$cardColor: '$colors$gradient' }}>
+      <Card css={{ marginLeft: "1%", $$cardColor: '$colors$gradient' }} style={{ height: '100%' }}>
         <Card.Body>
           <h2 className="mx-auto mt-10 text-xl font-semibold capitalize ">{title}</h2>
           {/* Chart */}
-          <Card>
-            <Card.Body>
-              <UiSwitch
-                checked={isPeninsula}
-                setIsPeninsula={setIsPeninsula}
-                textValues={['Peninsula, Canarias y Baleares', 'Ceuta y Melilla']}></UiSwitch>
-              <UiSwitch
-                checked={inKilowatts}
-                setIsPeninsula={setInKilowatts}
-                textValues={['Resultados en Kwh', 'Resultados en Mwh']}></UiSwitch>
-              <Grid.Container gap={2}>
+          <Card style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Card.Body style={{ width: '100%', height: '80%' }}>
+              <div style={{ height: '15%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'space-evenly', gap: "20px" }}>
+                <UiSwitch
+                  checked={isPeninsula}
+                  setIsPeninsula={setIsPeninsula}
+                  textValues={['Peninsula, Canarias y Baleares', 'Ceuta y Melilla']}></UiSwitch>
+                <UiSwitch
+                  checked={inKilowatts}
+                  setIsPeninsula={setInKilowatts}
+                  textValues={['Resultados en Kwh', 'Resultados en Mwh']}></UiSwitch>
+              </div>
+              <Grid.Container gap={2} style={{ height: '85%' }}>
                 <Grid md={12}>
                   <LineChart
                     data={isPeninsula ? luzPricesPcb : luzPricesCym}
@@ -95,44 +95,18 @@ const MainPage: NextPage<Props> = ({ title, luzPricesPcb, luzPricesCym, minorPri
               </Grid.Container>
             </Card.Body>
             {/* Summary */}
-            <Card css={{ w: "80%", marginLeft: "10%", $$cardColor: '$colors$neutral' }}>
-              <Card.Body>
-                <Grid.Container >
-                  <Grid xs={1}></Grid>
-                  <Grid xs={4}>
-                    <Card css={{ $$cardColor: '$colors$success' }}>
-                      <Card.Header >
-                        <Row justify="center" align="center">
-                          <h3>Hora de menor consumo:</h3>
-                        </Row>
-                      </Card.Header>
-                      <Card.Body>
-                        <Row justify="center" align="center">
-                          <h4>{getMinorPrice()}</h4>
-                        </Row>
-                      </Card.Body>
-                    </Card>
-                  </Grid>
-                  <Grid xs={2}>
-                  </Grid>
-                  <Grid xs={4}>
-                    <Card css={{ $$cardColor: '$colors$error' }}>
-                      <Card.Header >
-                        <Row justify="center" align="center">
-                          <h3>Hora de mayor consumo:</h3>
-                        </Row>
-                      </Card.Header>
-                      <Card.Body>
-                        <Row justify="center" align="center">
-                          <h4>{getMajorPrice()}</h4>
-                        </Row>
-                      </Card.Body>
-                    </Card>
-                  </Grid>
-                </Grid.Container>
+            <Card css={{ w: "80%", height: '20%', marginBottom: '10px', $$cardColor: '$colors$neutral' }}>
+              <Card.Body style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                  <Card css={{ $$cardColor: '$colors$success' }} style={{ width: '40%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                    <h4>Hora de menor consumo:</h4>
+                    <h4>{getMinorPrice()}</h4>
+                  </Card>
+                  <Card css={{ $$cardColor: '$colors$error' }} style={{ width: '40%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'  }}>
+                    <h4>Hora de mayor consumo:</h4>
+                    <h4>{getMajorPrice()}</h4>
+                  </Card>
               </Card.Body>
             </Card>
-            <br />
           </Card>
         </Card.Body>
       </Card>

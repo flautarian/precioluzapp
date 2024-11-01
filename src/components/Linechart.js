@@ -19,6 +19,7 @@ export const LineChart = ({ data, enabled, borderColor, backgroundColor, inKilow
 
     useEffect(() => {
         const myChartRef = chartRef.current.getContext('2d');
+        myChartRef.clearRect(0, 0, myChartRef.width, myChartRef.height);
 
         const values = Object.values(data).map(value => (inKilowatts ? value.price / 100 : value.price).toFixed(2));
 
@@ -63,7 +64,7 @@ export const LineChart = ({ data, enabled, borderColor, backgroundColor, inKilow
 
     return (
         <>
-            <div class="chart-container">
+            <div className="chart-container">
                 <canvas id="myChart" ref={chartRef}></canvas>
             </div>
         </>
